@@ -56,15 +56,8 @@ public class Main extends AppCompatActivity {
                 Button b = (Button) view; // Castear la vista del onClick a botón
                 textViewOp.append(b.getText());
                 num2 += b.getText().toString(); // Leer el texto de un botón
-                if (num2.equals("AC")){
-                    textViewResult.setText(" ");
-                    textViewOp.setText(" ");
-                }
-                else {
-                    double d = performOperation();
-
-                    textViewResult.setText(String.valueOf(d));
-                }
+                double d = performOperation();
+                textViewResult.setText(String.valueOf(d));
             }
         };
         //Crides funcions
