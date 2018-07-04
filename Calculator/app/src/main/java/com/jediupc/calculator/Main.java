@@ -20,7 +20,7 @@ public class Main extends AppCompatActivity {
     String operation = "";
     TextView textViewResult;
     TextView textViewOp;
-    Button ac, del, pow, sum, sub, sett, vuit, nou, rel, div, tres, quatre, cinc, sis, mul, dot, cero, u, dos, res;
+    Button ac, del, pow, sum, sub, set, vuit, nou, rel, div, tres, quatre, cinc, sis, mul, dot, cero, u, dos, res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class Main extends AppCompatActivity {
         pow = findViewById(R.id.POW);
         sum = findViewById(R.id.SUM);
         sub = findViewById(R.id.SUB);
-        sett = findViewById(R.id.set);
+        set = findViewById(R.id.set);
         vuit = findViewById(R.id.vuit);
         nou = findViewById(R.id.nou);
         rel = findViewById(R.id.REL);
@@ -47,37 +47,24 @@ public class Main extends AppCompatActivity {
         u = findViewById(R.id.u);
         dos = findViewById(R.id.dos);
         res = findViewById(R.id.RES);
+
+        //View's
         textViewOp = findViewById(R.id.textView2);
         textViewResult = findViewById(R.id.textView);
 
-        View.OnClickListener appendNumber = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Button b = (Button) view; // Castear la vista del onClick a botón
-                textViewOp.append(b.getText());
-                num2 += b.getText().toString(); // Leer el texto de un botón
-                double d = performOperation();
-                textViewResult.setText(String.valueOf(d));
-            }
-        };
+
         //Crides funcions
-        ac.setOnClickListener(appendNumber);
-        del.setOnClickListener(appendNumber);
-        pow.setOnClickListener(appendNumber);
-        sum.setOnClickListener(appendNumber);
-        sub.setOnClickListener(appendNumber);
-        sett.setOnClickListener(appendNumber);
+        ac.setOnClickListener(listenerOp);
+        del.setOnClickListener(listenerOp);
+        pow.setOnClickListener(listenerOp);
+        sum.setOnClickListener(listenerOp);
+        sub.setOnClickListener(listenerOp);
+        set.setOnClickListener(appendNumber);
         vuit.setOnClickListener(appendNumber);
         nou.setOnClickListener(appendNumber);
-        rel.setOnClickListener(appendNumber);
-        div.setOnClickListener(appendNumber);
-        tres.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Button b = (Button) v; // Castear la vista del onClick a botón
-                textViewOp.append(b.getText());
-            }
-        });
+        rel.setOnClickListener(listenerOp);
+        div.setOnClickListener(listenerOp);
+        tres.setOnClickListener(appendNumber);
         quatre.setOnClickListener(appendNumber);
         cinc.setOnClickListener(appendNumber);
         sis.setOnClickListener(appendNumber);
@@ -89,19 +76,27 @@ public class Main extends AppCompatActivity {
         res.setOnClickListener(appendNumber);
 
         //Toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-
-            setContentView(R.layout.activity_main);
-
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
 
     }
+    View.OnClickListener appendNumber = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Button b = (Button) view; // Castear la vista del onClick a botón
+            //textViewOp.append(b.getText());
+            num2 += b.getText().toString(); // Leer el texto de un botón
+            double d = performOperation();
+            textViewResult.setText(String.valueOf(d));
+        }
+    };
 
     View.OnClickListener listenerOp = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            Button b = (Button) v; // Castear la vista del onClick a botón
+            textViewOp.append(b.getText());
         }
     };
     // OnClick botón número
