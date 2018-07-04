@@ -2,6 +2,7 @@ package com.jediupc.calculator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,17 +20,19 @@ public class Main extends AppCompatActivity {
     String operation = "";
     TextView textViewResult;
     TextView textViewOp;
-    Button ac, del, pow, sum, sub, set, vuit, nou, rel, div, tres, quatre, cinc, sis, mul, dot, cero, u, dos, res;
+    Button ac, del, pow, sum, sub, sett, vuit, nou, rel, div, tres, quatre, cinc, sis, mul, dot, cero, u, dos, res;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ac = findViewById(R.id.AC);
         del = findViewById(R.id.DEL);
         pow = findViewById(R.id.POW);
         sum = findViewById(R.id.SUM);
         sub = findViewById(R.id.SUB);
-        set = findViewById(R.id.set);
+        sett = findViewById(R.id.set);
         vuit = findViewById(R.id.vuit);
         nou = findViewById(R.id.nou);
         rel = findViewById(R.id.REL);
@@ -46,18 +49,42 @@ public class Main extends AppCompatActivity {
         res = findViewById(R.id.RES);
         textViewOp = findViewById(R.id.textView2);
         textViewResult = findViewById(R.id.textView);
+
+        View.OnClickListener appendNumber = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Button b = (Button) view; // Castear la vista del onClick a botón
+                textViewOp.append(b.getText());
+                num2 += b.getText().toString(); // Leer el texto de un botón
+                if (num2.equals("AC")){
+                    textViewResult.setText(" ");
+                    textViewOp.setText(" ");
+                }
+                else {
+                    double d = performOperation();
+
+                    textViewResult.setText(String.valueOf(d));
+                }
+            }
+        };
         //Crides funcions
         ac.setOnClickListener(appendNumber);
         del.setOnClickListener(appendNumber);
         pow.setOnClickListener(appendNumber);
         sum.setOnClickListener(appendNumber);
         sub.setOnClickListener(appendNumber);
-        set.setOnClickListener(appendNumber);
+        sett.setOnClickListener(appendNumber);
         vuit.setOnClickListener(appendNumber);
         nou.setOnClickListener(appendNumber);
         rel.setOnClickListener(appendNumber);
         div.setOnClickListener(appendNumber);
-        tres.setOnClickListener(appendNumber);
+        tres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Button b = (Button) v; // Castear la vista del onClick a botón
+                textViewOp.append(b.getText());
+            }
+        });
         quatre.setOnClickListener(appendNumber);
         cinc.setOnClickListener(appendNumber);
         sis.setOnClickListener(appendNumber);
@@ -67,24 +94,25 @@ public class Main extends AppCompatActivity {
         u.setOnClickListener(appendNumber);
         dos.setOnClickListener(appendNumber);
         res.setOnClickListener(appendNumber);
-    }
-    // OnClick botón número
-    View.OnClickListener appendNumber = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Button b = (Button) view; // Castear la vista del onClick a botón
-            textViewOp.append(b.getText());
-            num2 += b.getText().toString(); // Leer el texto de un botón
-            if (num2.equals("AC")){
-                textViewResult.setText(" ");
-            }
-            else {
-                double d = performOperation();
 
-                textViewResult.setText(String.valueOf(d));
-            }
+        //Toolbar
+
+
+            setContentView(R.layout.activity_main);
+
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+    }
+
+    View.OnClickListener listenerOp = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
         }
     };
+    // OnClick botón número
+
 
 
     double performOperation(){
@@ -95,10 +123,10 @@ public class Main extends AppCompatActivity {
         else if (operation.equals("-")){
             d = result - d;
         }
-        else if (Objects.equals("/", operation)){
+        else if (operation.equals("/")){
             d = result / d;
         }
-        else if (Objects.equals(operation, "x")){
+        else if (operation.equals("x")){
             d *= result;
         }
         else if (operation.equals("REL")){
@@ -109,4 +137,5 @@ public class Main extends AppCompatActivity {
         }
         return d;
     }
+
 }

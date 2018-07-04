@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".Main">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/textView2"
         android:layout_width="373dp"
@@ -15,10 +24,13 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.142" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -108,7 +120,7 @@
                 android:height="70dp"
                 android:text="7"
                 android:textSize="24sp"
-                tools:id="set" />
+                tools:id="sett" />
 
             <Button
                 android:id="@+id/vuit"
@@ -152,6 +164,7 @@
                 android:textSize="24sp"
                 tools:text="/" />
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/MIDB"
@@ -276,13 +289,32 @@
         android:id="@+id/textView"
         android:layout_width="373dp"
         android:layout_height="99dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="366dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="text|textPersonName"
+        android:text="-----------------------------"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </android.support.constraint.ConstraintLayout>
