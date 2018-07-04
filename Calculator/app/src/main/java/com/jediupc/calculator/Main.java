@@ -85,10 +85,9 @@ public class Main extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Button b = (Button) view; // Castear la vista del onClick a botón
-            //textViewOp.append(b.getText());
+            textViewOp.append(b.getText());
             num2 += b.getText().toString(); // Leer el texto de un botón
             double d = performOperation();
-            textViewResult.setText(String.valueOf(d));
         }
     };
 
@@ -96,7 +95,9 @@ public class Main extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Button b = (Button) v; // Castear la vista del onClick a botón
-            textViewOp.append(b.getText());
+            if (!b.getText().toString().equals("AC") || !b.getText().toString().equals("DEL")) {
+                textViewOp.append(b.getText());
+            }
         }
     };
     // OnClick botón número
