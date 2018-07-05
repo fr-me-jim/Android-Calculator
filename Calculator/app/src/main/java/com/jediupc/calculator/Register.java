@@ -53,28 +53,50 @@ public class Register extends AppCompatActivity {
                 if (!rpass.isEmpty() && rpass.equals(pass)){
                     /* CONSULTAR SHARED PREFERENCES*/
                     //Instanciamos el SharedPreferences
-                    SharedPreferences settings = getSharedPreferences("User Account", Context.MODE_PRIVATE);
+                    SharedPreferences settings = getSharedPreferences("Accounts", Context.MODE_PRIVATE);
                     //Consultamos
-                    boolean silent = settings.getBoolean("myBoolean", false);
-
-
-                    /* ESCRIBIR EN SHARED PREFERENCES*/
-                    //Instanciamos el SharedPreferences
-                    SharedPreferences settings = getSharedPreferences("User Account", 0);
-                    //Obtenemos el editor
-                    SharedPreferences.Editor editor = settings.edit();
-                    //Editamos
-                    editor.putBoolean("silentMode", mSilentMode);
-                    //Guardamos los cambios
-                    editor.apply();
+                    String userName = settings.getString("username", "");
+                    String passWord = settings.getString("password", "");
+                    if (!user.equals(userName) && !pass.equals(passWord)) {
+                        /* ESCRIBIR EN SHARED PREFERENCES*/
+                        //Instanciamos el SharedPreferences
+                        settings = getSharedPreferences("Accounts", 0);
+                        //Obtenemos el editor
+                        SharedPreferences.Editor editor = settings.edit();
+                        //Editamos
+                        editor.putString("username", user);
+                        editor.putString("password", pass);
+                        //Guardamos los cambios
+                        editor.apply();
+                    }
 
                     //Back when pressing Register
                     finishActivity(1);
                 }
+               //Unfilled Repeat pass
+                else if (rpass.isEmpty()){
+                    Context context = getApplicationContext();
+                    CharSequence text = "Remaining Repeated Password.";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.setGravity(Gravity.TOP, 0, 0);
+                    toast.show();
+                }
+                //Passwords don't match
+                else if (!rpass.equals(pass)){
+                    Context context = getApplicationContext();
+                    CharSequence text = "Matching error Password.";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.setGravity(Gravity.TOP, 0, 0);
+                    toast.show();
+                }
+
             }
+            //Unfilled gaps
             else {
                 Context context = getApplicationContext();
-               if() CharSequence text = "Fill all the gaps pls.";
+                CharSequence text = "Remaining Username or Password.";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.setGravity(Gravity.TOP, 0, 0);
@@ -83,6 +105,7 @@ public class Register extends AppCompatActivity {
         }
     };
 
+    //Whitespace filter
     InputFilter filter = new InputFilter() {
         public CharSequence filter(CharSequence source, int start, int end,
                                    Spanned dest, int dstart, int dend) {

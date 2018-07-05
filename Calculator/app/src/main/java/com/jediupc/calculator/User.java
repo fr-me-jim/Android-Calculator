@@ -2,6 +2,7 @@ package com.jediupc.calculator;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class User extends AppCompatActivity {
-    EditText n,p;
+    EditText u,p;
     Button l, r;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class User extends AppCompatActivity {
         //logIn phase
         l = findViewById(R.id.logIn);
         r = findViewById(R.id.register);
-        n = findViewById(R.id.editText);
+        u = findViewById(R.id.editText);
         p = findViewById(R.id.editText2);
         l.setOnClickListener(log);
         r.setOnClickListener(reg);
@@ -38,7 +39,7 @@ public class User extends AppCompatActivity {
     View.OnClickListener log = new View.OnClickListener() {
         public void onClick(View v) {
 
-            if(logIn(n.getText().toString(), p.getText().toString())) {
+            if(logIn(u.getText().toString(), p.getText().toString())) {
                 Intent i = new Intent(getApplicationContext(), Main.class);
                 startActivity(i);
                 setContentView(R.layout.activity_main);
@@ -60,9 +61,15 @@ public class User extends AppCompatActivity {
             setContentView(R.layout.activity_register);
         }
     };
-    static boolean logIn (String nom, String pass) {
-            if (nom.equals("Fran") && pass.equals("fran")) return true;
-            else return false;
+    boolean logIn(String user, String pass) {
+        /* CONSULTAR SHARED PREFERENCES*/
+        //Instanciamos el SharedPreferences
+        SharedPreferences settings = getSharedPreferences("Accounts", Context.MODE_PRIVATE);
+        //Consultamos
+        String userName = settings.getString("username", "");
+        String passWord = settings.getString("password", "");
+        if (user.equals(userName) && pass.equals(passWord)) return true;
+        else return false;
     }
 
 
