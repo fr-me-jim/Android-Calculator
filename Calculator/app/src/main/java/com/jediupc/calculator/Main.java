@@ -3,6 +3,7 @@ package com.jediupc.calculator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -130,4 +131,21 @@ public class Main extends AppCompatActivity {
         return d;
     }
 
+
+    //Screen Toggle
+    @Override
+    protected void onSaveInstanceState(Bundle outstate){
+        super.onSaveInstanceState(outstate);
+        TextView t = findViewById(R.id.textView);
+        outstate.putString("result", t.getText().toString());
+        Log.v("result", t.getText().toString());
+    }
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        TextView t = findViewById(R.id.textView);
+        t.setText(savedInstanceState.getString("result"));
+        Log.v("retrieving",savedInstanceState.getString("result"));
+    }
 }
+

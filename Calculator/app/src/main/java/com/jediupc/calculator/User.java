@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ public class User extends AppCompatActivity {
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("User LogIn");
         setSupportActionBar(toolbar);
 
         //logIn phase
@@ -61,5 +63,22 @@ public class User extends AppCompatActivity {
     static boolean logIn (String nom, String pass) {
             if (nom.equals("Fran") && pass.equals("fran")) return true;
             else return false;
+    }
+
+
+    //Screen Toggle
+    @Override
+    protected void onSaveInstanceState(Bundle outstate){
+        super.onSaveInstanceState(outstate);
+        TextView t = findViewById(R.id.textView);
+        outstate.putString("result", t.getText().toString());
+        Log.v("result", t.getText().toString());
+    }
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        TextView t = findViewById(R.id.textView);
+        t.setText(savedInstanceState.getString("result"));
+        Log.v("retrieving",savedInstanceState.getString("result"));
     }
 }
