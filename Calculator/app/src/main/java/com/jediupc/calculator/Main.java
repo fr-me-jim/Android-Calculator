@@ -80,14 +80,19 @@ public class Main extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+
+
+
     }
+
+    // OnClick botón número
     View.OnClickListener appendNumber = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Button b = (Button) view; // Castear la vista del onClick a botón
             textViewOp.append(b.getText());
             num2 += b.getText().toString(); // Leer el texto de un botón
-            double d = performOperation();
+            //double d = performOperation();
         }
     };
 
@@ -100,8 +105,6 @@ public class Main extends AppCompatActivity {
             }
         }
     };
-    // OnClick botón número
-
 
 
     double performOperation(){
