@@ -7,11 +7,8 @@
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
     <color name="icons">#212121</color>
-    <color name="divider">#BDBDBD</color>
+    <color name="divider">#bdbdbd</color>
+    <color name="brownie">#5d4037</color>
+    <color name="brownieLight">#795548</color>
+    <color name="brownieDark">#4e342e</color>
 </resources>
-<!--<resources>
-    <color name="colorPrimary">#3f51b5</color>
-    <color name="colorPrimaryDark">#303f9f</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="divider">#15a187</color>
-</resources>-->
