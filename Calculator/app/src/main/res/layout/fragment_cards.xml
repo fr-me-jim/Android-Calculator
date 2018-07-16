@@ -15,12 +15,12 @@
 
         <LinearLayout
             android:id="@+id/board"
-            android:layout_width="341dp"
-            android:layout_height="443dp"
+            android:layout_width="344dp"
+            android:layout_height="446dp"
             android:orientation="vertical"
             tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="24dp"
-            tools:layout_editor_absoluteY="114dp">
+            tools:layout_editor_absoluteX="21dp"
+            tools:layout_editor_absoluteY="111dp">
 
             <LinearLayout
                 android:id="@+id/row1"
@@ -224,8 +224,8 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView4"
-            android:layout_width="327dp"
+            android:id="@+id/textTemp"
+            android:layout_width="84dp"
             android:layout_height="50dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
@@ -237,23 +237,61 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/board"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.533"
+            app:layout_constraintHorizontal_bias="0.059"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.771" />
+            app:layout_constraintVertical_bias="0.844" />
+
+        <TextView
+            android:id="@+id/cont"
+            android:layout_width="71dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="140dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/board"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textTemp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.844"
+            tools:ignore="NotSibling" />
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="96dp"
-            android:layout_height="36dp"
+            android:id="@+id/start"
+            android:layout_width="71dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:text="@string/res"
-            android:textColor="@color/primary_text"
-            app:layout_constraintEnd_toEndOf="@+id/textView4"
+            android:layout_marginTop="8dp"
+            android:text="@string/start"
+            app:layout_constraintBottom_toTopOf="@+id/board"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.211"
+            app:layout_constraintStart_toEndOf="@+id/cont"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.826" />
+
+        <Button
+            android:id="@+id/stop"
+            android:layout_width="68dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/stop"
+            app:layout_constraintBottom_toTopOf="@+id/board"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            tools:layout_editor_absoluteY="52dp" />
+            app:layout_constraintStart_toEndOf="@+id/start"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.825" />
+
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

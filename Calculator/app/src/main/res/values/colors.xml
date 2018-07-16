@@ -11,4 +11,5 @@
     <color name="brownie">#5d4037</color>
     <color name="brownieLight">#795548</color>
     <color name="brownieDark">#4e342e</color>
+    <color name="dialog">#512DA8</color>
 </resources>

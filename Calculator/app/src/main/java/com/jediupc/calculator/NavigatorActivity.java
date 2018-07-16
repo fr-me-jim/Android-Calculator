@@ -102,7 +102,6 @@ public class NavigatorActivity extends AppCompatActivity
             setSupportActionBar(toolbar);
             addFragment(new Cards_Fragment());
         } else if (id == R.id.nav_share) {
-            addFragment(new Calc_Fragment());
         } else if (id == R.id.nav_send) {
 
         }

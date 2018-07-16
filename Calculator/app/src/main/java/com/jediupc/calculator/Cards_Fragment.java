@@ -1,12 +1,15 @@
 package com.jediupc.calculator;
 
 
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -19,12 +22,13 @@ import java.util.Collections;
  */
 public class Cards_Fragment extends Fragment {
     View rootView;
-    Drawable neutral, geralt,yen,triss,ciri,ilmerith,avallach, draug, crone, arachas, letho;
-    ImageButton img1,img1c,img2,img2c,img3,img3c,img4,img4c,img5,img5c,img6,img6c,img7,img7c,img8,img8c,img9,img9c,img10,img10c;
+    Drawable neutral;
+    //ImageButton img1,img1c,img2,img2c,img3,img3c,img4,img4c,img5,img5c,img6,img6c,img7,img7c,img8,img8c,img9,img9c,img10,img10c;
     ArrayList<ImageButton> cards;
     ArrayList<Drawable> cardImg;
     CoolImageFlipper flipper;
     ImageButton first, second;
+    Button stop,start;
     boolean firstCard = false, secondCard = false;
     public Cards_Fragment() {
         // Required empty public constructor
@@ -37,10 +41,11 @@ public class Cards_Fragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_cards, container, false);
         flipper = new CoolImageFlipper(rootView.getContext());
+        neutral = rootView.getResources().getDrawable(R.drawable.neutral);
 
         //Initialize arrays
-        arrayImgFill(cardImg);
-        arrayFill(cards);
+        arrayImgFill();
+        arrayFill();
 
         //Shuffle
         Collections.shuffle(cardImg);
@@ -50,10 +55,21 @@ public class Cards_Fragment extends Fragment {
             card.setOnClickListener(flip);
         }
 
+        //Pause Dialog
+        stop.setOnClickListener(showDialog);
+
 
 
         return rootView;
     }
+
+    View.OnClickListener showDialog = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            DialogFragment dialog = new DialogFragment();
+            dialog.show(getFragmentManager(),"Paused");
+        }
+    };
 
     View.OnClickListener flip = new View.OnClickListener() {
         @Override
@@ -85,7 +101,7 @@ public class Cards_Fragment extends Fragment {
         }
     };
 
-    public void arrayFill(ArrayList<ImageButton> a){
+    public void arrayFill(){
 
         LinearLayout ly = rootView.findViewById(R.id.board);
 
@@ -93,32 +109,32 @@ public class Cards_Fragment extends Fragment {
             LinearLayout row = (LinearLayout) ly.getChildAt(i);
             for (int j = 0; j < 4; j++) {
                 ImageButton ib = (ImageButton) row.getChildAt(j);
-                a.add(ib);
+                cards.add(ib);
             }
         }
     }
 
-    public void arrayImgFill(ArrayList<Drawable> a) {
-        a.add(arachas);
-        a.add(arachas);
-        a.add(avallach);
-        a.add(avallach);
-        a.add(ciri);
-        a.add(ciri);
-        a.add(crone);
-        a.add(crone);
-        a.add(draug);
-        a.add(draug);
-        a.add(geralt);
-        a.add(geralt);
-        a.add(ilmerith);
-        a.add(ilmerith);
-        a.add(letho);
-        a.add(letho);
-        a.add(triss);
-        a.add(triss);
-        a.add(yen);
-        a.add(yen);
+    public void arrayImgFill() {
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.arachas));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.arachas));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.avallach));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.avallach));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.ciri));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.ciri));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.crone));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.crone));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.draug));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.draug));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.geralt));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.geralt));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.ilmerith));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.ilmerith));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.letho));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.letho));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.triss));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.triss));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.yen));
+        cardImg.add(rootView.getResources().getDrawable(R.drawable.yen));
     }
 
     public boolean check() {
