@@ -44,6 +44,8 @@ public class Cards_Fragment extends Fragment {
         neutral = rootView.getResources().getDrawable(R.drawable.neutral);
 
         //Initialize arrays
+        cards = new ArrayList<>();
+        cardImg = new ArrayList<>();
         arrayImgFill();
         arrayFill();
 
@@ -56,6 +58,7 @@ public class Cards_Fragment extends Fragment {
         }
 
         //Pause Dialog
+        stop = rootView.findViewById(R.id.stop);
         stop.setOnClickListener(showDialog);
 
 
