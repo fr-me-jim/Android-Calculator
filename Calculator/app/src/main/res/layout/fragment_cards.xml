@@ -17,10 +17,17 @@
             android:id="@+id/board"
             android:layout_width="344dp"
             android:layout_height="446dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:orientation="vertical"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="21dp"
-            tools:layout_editor_absoluteY="111dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.923"
+            tools:ignore="MissingConstraints">
 
             <LinearLayout
                 android:id="@+id/row1"
@@ -35,7 +42,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:adjustViewBounds="true"
-                    android:scaleType="centerInside"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
 
                 <ImageButton
@@ -43,8 +50,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
 
                 <ImageButton
@@ -52,8 +59,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
 
                 <ImageButton
@@ -61,8 +68,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
             </LinearLayout>
 
@@ -78,8 +85,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="centerInside"
                     android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
 
                 <ImageButton
@@ -87,8 +94,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="centerInside"
                     android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
 
                 <ImageButton
@@ -96,8 +103,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="centerInside"
                     android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
 
                 <ImageButton
@@ -105,8 +112,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="centerInside"
                     android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
             </LinearLayout>
 
@@ -122,8 +129,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="centerInside"
                     android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
 
                 <ImageButton
@@ -131,8 +138,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="centerInside"
                     android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
 
                 <ImageButton
@@ -140,8 +147,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="centerInside"
                     android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
 
                 <ImageButton
@@ -149,8 +156,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="centerInside"
                     android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
             </LinearLayout>
 
@@ -166,8 +173,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="centerInside"
                     android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
 
                 <ImageButton
@@ -175,8 +182,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="centerInside"
                     android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
 
                 <ImageButton
@@ -184,8 +191,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="centerInside"
                     android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
 
                 <ImageButton
@@ -193,54 +200,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="centerInside"
                     android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/neutral" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/row5"
-                android:layout_width="match_parent"
-                android:layout_height="275dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/img9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/neutral" />
-
-                <ImageButton
-                    android:id="@+id/img9c"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/neutral" />
-
-                <ImageButton
-                    android:id="@+id/img10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/neutral" />
-
-                <ImageButton
-                    android:id="@+id/img10c"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/neutral" />
-            </LinearLayout>
         </LinearLayout>
 
         <TextView
@@ -254,13 +218,13 @@
             android:gravity="center|start"
             android:text="@string/temp"
             android:textColor="@color/primary_text"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/board"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.059"
+            app:layout_constraintHorizontal_bias="0.07"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.844" />
+            app:layout_constraintVertical_bias="0.075" />
 
         <TextView
             android:id="@+id/cont"
@@ -272,12 +236,12 @@
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/board"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.066"
             app:layout_constraintStart_toEndOf="@+id/textTemp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.844"
+            app:layout_constraintVertical_bias="0.075"
             tools:ignore="NotSibling" />
 
         <Button
@@ -289,12 +253,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/start"
-            app:layout_constraintBottom_toTopOf="@+id/board"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.211"
+            app:layout_constraintHorizontal_bias="0.135"
             app:layout_constraintStart_toEndOf="@+id/cont"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.826" />
+            app:layout_constraintVertical_bias="0.075" />
 
         <Button
             android:id="@+id/stop"
@@ -305,12 +269,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/stop"
-            app:layout_constraintBottom_toTopOf="@+id/board"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/start"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.825" />
+            app:layout_constraintVertical_bias="0.075" />
 
     </android.support.constraint.ConstraintLayout>
 

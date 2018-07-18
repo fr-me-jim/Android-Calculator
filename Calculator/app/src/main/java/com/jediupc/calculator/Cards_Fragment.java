@@ -23,9 +23,9 @@ import java.util.Collections;
 public class Cards_Fragment extends Fragment {
     View rootView;
     Drawable neutral;
-    //ImageButton img1,img1c,img2,img2c,img3,img3c,img4,img4c,img5,img5c,img6,img6c,img7,img7c,img8,img8c,img9,img9c,img10,img10c;
     ArrayList<ImageButton> cards;
     ArrayList<Drawable> cardImg;
+    ArrayList<Boolean> revealed;
     CoolImageFlipper flipper;
     ImageButton first, second;
     Button stop,start;
@@ -46,6 +46,10 @@ public class Cards_Fragment extends Fragment {
         //Initialize arrays
         cards = new ArrayList<>();
         cardImg = new ArrayList<>();
+        revealed = new ArrayList<>();
+        for (int i = 0; i < 16;++i) {
+            revealed.add(false);
+        }
         arrayImgFill();
         arrayFill();
 
@@ -81,19 +85,24 @@ public class Cards_Fragment extends Fragment {
                 firstCard = true;
                 first = (ImageButton) v;
                 flipper.flipImage(cardImg.get(cards.indexOf(first)), cards.get(cards.indexOf(first)));
+
             }
             else {
                 if (!secondCard) {
                     secondCard = true;
                     second = (ImageButton) v;
                     flipper.flipImage(cardImg.get(cards.indexOf(second)), cards.get(cards.indexOf(second)));
+
                 }
             }
-            sleep();
             if (firstCard && secondCard) {
                 if (check()) {
                     firstCard = false;
                     secondCard = false;
+                    revealed.set(cards.indexOf(first), true);
+                    revealed.set(cards.indexOf(second), true);
+                    cards.get(cards.indexOf(first)).setImageDrawable(cardImg.get(cards.indexOf(first)));
+                    cards.get(cards.indexOf(second)).setImageDrawable(cardImg.get(cards.indexOf(second)));
                 }
                 else {
                     firstCard = false;
@@ -106,16 +115,22 @@ public class Cards_Fragment extends Fragment {
     };
 
     public void arrayFill(){
-
-        LinearLayout ly = rootView.findViewById(R.id.board);
-
-        for (int i = 0; i < 5; i++) {
-            LinearLayout row = (LinearLayout) ly.getChildAt(i);
-            for (int j = 0; j < 4; j++) {
-                ImageButton ib = (ImageButton) row.getChildAt(j);
-                cards.add(ib);
-            }
-        }
+        cards.add((ImageButton) rootView.findViewById(R.id.img1));
+        cards.add((ImageButton) rootView.findViewById(R.id.img1c));
+        cards.add((ImageButton) rootView.findViewById(R.id.img2));
+        cards.add((ImageButton) rootView.findViewById(R.id.img2c));
+        cards.add((ImageButton) rootView.findViewById(R.id.img3));
+        cards.add((ImageButton) rootView.findViewById(R.id.img3c));
+        cards.add((ImageButton) rootView.findViewById(R.id.img4));
+        cards.add((ImageButton) rootView.findViewById(R.id.img4c));
+        cards.add((ImageButton) rootView.findViewById(R.id.img5));
+        cards.add((ImageButton) rootView.findViewById(R.id.img5c));
+        cards.add((ImageButton) rootView.findViewById(R.id.img6));
+        cards.add((ImageButton) rootView.findViewById(R.id.img6c));
+        cards.add((ImageButton) rootView.findViewById(R.id.img7));
+        cards.add((ImageButton) rootView.findViewById(R.id.img7c));
+        cards.add((ImageButton) rootView.findViewById(R.id.img8));
+        cards.add((ImageButton) rootView.findViewById(R.id.img8c));
     }
 
     public void arrayImgFill() {
@@ -125,8 +140,6 @@ public class Cards_Fragment extends Fragment {
         cardImg.add(rootView.getResources().getDrawable(R.drawable.avallach));
         cardImg.add(rootView.getResources().getDrawable(R.drawable.ciri));
         cardImg.add(rootView.getResources().getDrawable(R.drawable.ciri));
-        cardImg.add(rootView.getResources().getDrawable(R.drawable.crone));
-        cardImg.add(rootView.getResources().getDrawable(R.drawable.crone));
         cardImg.add(rootView.getResources().getDrawable(R.drawable.draug));
         cardImg.add(rootView.getResources().getDrawable(R.drawable.draug));
         cardImg.add(rootView.getResources().getDrawable(R.drawable.geralt));
@@ -142,7 +155,7 @@ public class Cards_Fragment extends Fragment {
     }
 
     public boolean check() {
-        if (first.getDrawable().equals(second.getDrawable())) return true;
+        if (cardImg.get(cards.indexOf(first)).equals(cardImg.get(cards.indexOf(second)))) return true;
         else return false;
     }
 }
