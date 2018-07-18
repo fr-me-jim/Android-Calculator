@@ -88,17 +88,18 @@ public class Cards_Fragment extends Fragment {
                     second = (ImageButton) v;
                     flipper.flipImage(cardImg.get(cards.indexOf(second)), cards.get(cards.indexOf(second)));
                 }
+            }
+            sleep();
+            if (firstCard && secondCard) {
+                if (check()) {
+                    firstCard = false;
+                    secondCard = false;
+                }
                 else {
-                    if (check()) {
-                        firstCard = false;
-                        secondCard = false;
-                    }
-                    else {
-                        firstCard = false;
-                        flipper.flipImage(neutral, cards.get(cards.indexOf(first)));
-                        secondCard = false;
-                        flipper.flipImage(neutral, cards.get(cards.indexOf(second)));
-                    }
+                    firstCard = false;
+                    flipper.flipImage(neutral, cards.get(cards.indexOf(first)));
+                    secondCard = false;
+                    flipper.flipImage(neutral, cards.get(cards.indexOf(second)));
                 }
             }
         }
