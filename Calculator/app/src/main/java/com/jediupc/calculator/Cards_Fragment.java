@@ -4,6 +4,8 @@ package com.jediupc.calculator;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -30,6 +32,8 @@ public class Cards_Fragment extends Fragment {
     ImageButton first, second;
     Button stop,start;
     boolean firstCard = false, secondCard = false;
+    protected int splashTime = 1000;
+    int timer = 0;
     public Cards_Fragment() {
         // Required empty public constructor
     }
@@ -108,20 +112,24 @@ public class Cards_Fragment extends Fragment {
                 }
             }
             if (firstCard && secondCard) {
-                if (check()) {
-                    firstCard = false;
-                    secondCard = false;
-                    revealed.set(cards.indexOf(first), true);
-                    revealed.set(cards.indexOf(second), true);
-                    /*cards.get(cards.indexOf(first)).setImageResource(cardImg.get(cards.indexOf(first)));
-                    cards.get(cards.indexOf(second)).setImageDrawable(cardImg.get(cards.indexOf(second)));*/
-                }
-                else {
-                    firstCard = false;
-                    flipper.flipImage(neutral, cards.get(cards.indexOf(first)));
-                    secondCard = false;
-                    flipper.flipImage(neutral, cards.get(cards.indexOf(second)));
-                }
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (check()) {
+                            firstCard = false;
+                            secondCard = false;
+                            revealed.set(cards.indexOf(first), true);
+                            revealed.set(cards.indexOf(second), true);
+                        }
+                        else {
+                            firstCard = false;
+                            flipper.flipImage(neutral, cards.get(cards.indexOf(first)));
+                            secondCard = false;
+                            flipper.flipImage(neutral, cards.get(cards.indexOf(second)));
+                        }
+                    }
+                },1000);
             }
         }
     };
@@ -146,8 +154,6 @@ public class Cards_Fragment extends Fragment {
     }
 
     public void arrayImgFill() {
-        cardImg.add(rootView.getResources().getDrawable(R.drawable.arachas));
-        cardImg.add(rootView.getResources().getDrawable(R.drawable.arachas));
         cardImg.add(rootView.getResources().getDrawable(R.drawable.avallach));
         cardImg.add(rootView.getResources().getDrawable(R.drawable.avallach));
         cardImg.add(rootView.getResources().getDrawable(R.drawable.ciri));
@@ -169,7 +175,6 @@ public class Cards_Fragment extends Fragment {
     public boolean check() {
         Drawable f = cardImg.get(cards.indexOf(first));
         Drawable s = cardImg.get(cards.indexOf(second));
-        if (f.equals(s)) return true;
-        else return false;
+        return f.equals(s);
     }
 }
