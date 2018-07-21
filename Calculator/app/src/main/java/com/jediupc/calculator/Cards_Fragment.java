@@ -73,8 +73,17 @@ public class Cards_Fragment extends Fragment {
     View.OnClickListener showDialog = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            DialogFragment dialog = new DialogFragment();
-            dialog.show(getFragmentManager(),"Paused");
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+            View view = inflater.inflate(R.layout.dialog_pause, null);
+            builder.setView(view);
+            Button resume = view.findViewById(R.id.btnResume);
+            resume.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ;
+                }
+            });
         }
     };
 
@@ -82,16 +91,19 @@ public class Cards_Fragment extends Fragment {
         @Override
         public void onClick(View v) {
             if (!firstCard) {
-                firstCard = true;
                 first = (ImageButton) v;
-                flipper.flipImage(cardImg.get(cards.indexOf(first)), cards.get(cards.indexOf(first)));
-
+                if(!revealed.get(cards.indexOf(first))) {
+                    firstCard = true;
+                    flipper.flipImage(cardImg.get(cards.indexOf(first)), cards.get(cards.indexOf(first)));
+                }
             }
             else {
                 if (!secondCard) {
-                    secondCard = true;
                     second = (ImageButton) v;
-                    flipper.flipImage(cardImg.get(cards.indexOf(second)), cards.get(cards.indexOf(second)));
+                    if (!revealed.get(cards.indexOf(second))) {
+                        secondCard = true;
+                        flipper.flipImage(cardImg.get(cards.indexOf(second)), cards.get(cards.indexOf(second)));
+                    }
 
                 }
             }
@@ -101,8 +113,8 @@ public class Cards_Fragment extends Fragment {
                     secondCard = false;
                     revealed.set(cards.indexOf(first), true);
                     revealed.set(cards.indexOf(second), true);
-                    cards.get(cards.indexOf(first)).setImageDrawable(cardImg.get(cards.indexOf(first)));
-                    cards.get(cards.indexOf(second)).setImageDrawable(cardImg.get(cards.indexOf(second)));
+                    /*cards.get(cards.indexOf(first)).setImageResource(cardImg.get(cards.indexOf(first)));
+                    cards.get(cards.indexOf(second)).setImageDrawable(cardImg.get(cards.indexOf(second)));*/
                 }
                 else {
                     firstCard = false;
@@ -155,7 +167,9 @@ public class Cards_Fragment extends Fragment {
     }
 
     public boolean check() {
-        if (cardImg.get(cards.indexOf(first)).equals(cardImg.get(cards.indexOf(second)))) return true;
+        Drawable f = cardImg.get(cards.indexOf(first));
+        Drawable s = cardImg.get(cards.indexOf(second));
+        if (f.equals(s)) return true;
         else return false;
     }
 }

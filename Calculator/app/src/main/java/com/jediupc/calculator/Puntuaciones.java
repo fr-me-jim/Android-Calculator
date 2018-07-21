@@ -1,5 +1,4 @@
-/*
-package com.example;
+package com.jediupc.calculator;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -18,8 +17,8 @@ public class Puntuaciones {
 
     public String getUsername() {
         return username;
-    }*/
-/*
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -40,4 +39,4 @@ public class Puntuaciones {
         this.id = id;
     }
 
-}*/
+}

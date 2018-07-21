@@ -1,24 +1,32 @@
+
 package com.jediupc.calculator;
 
-import io.realm.RealmObject;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-public class Puntuacion extends RealmObject {
-    private String fecha;
-    private int puntuacion;
+public class Puntuacion {
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-    public void setPuntuacion(int puntuacion) {
-        this.puntuacion = puntuacion;
-    }
+    @SerializedName("score")
+    @Expose
+    private Integer score;
+    @SerializedName("username")
+    @Expose
+    private String username;
 
-    public String getFecha() {
-        return fecha;
+    public Integer getScore() {
+        return score;
     }
 
-    public int getPuntuacion() {
-        return puntuacion;
+    public void setScore(Integer score) {
+        this.score = score;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 }
-

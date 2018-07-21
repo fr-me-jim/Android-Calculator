@@ -1,6 +1,9 @@
 package com.jediupc.calculator;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,12 +20,16 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class RegisterActivity extends AppCompatActivity {
 
     EditText u,p,rp,ph,c;
+    String userStr, passStr, rpass, phone, college;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,9 @@ public class RegisterActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Sign In");
         setSupportActionBar(toolbar);
+
+        //Realm
+        realm = Realm.getDefaultInstance();
 
         //Space input filter
         u = findViewById(R.id.nUser);
@@ -49,6 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         c = findViewById(R.id.uni);
 
+
         //Button event
         Button register = findViewById(R.id.register);
         register.setOnClickListener(signIn);
@@ -58,39 +69,27 @@ public class RegisterActivity extends AppCompatActivity {
     View.OnClickListener signIn = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String userStr = u.getText().toString(), pass = p.getText().toString(), rpass = rp.getText().toString();
-            String phone = ph.getText().toString(), coll = c.getText().toString();
-            if (!userStr.isEmpty() && !pass.isEmpty() && !phone.isEmpty() && !coll.isEmpty()){
-                if (!rpass.isEmpty() && rpass.equals(pass)){
-                    Realm realm = Realm.getDefaultInstance();
-                    final User userName = realm.where(User.class).equalTo("username", userStr).findFirst();
-                    final User passWord = realm.where(User.class).equalTo("password", pass).findFirst();
-                    if (!userStr.equals(userName) && !pass.equals(passWord)) {
-                        User user = new User();
-                        user.setUsername(userStr);
-                        user.setPassword(pass);
-                        user.setTelefon(phone);
-                        user.setUniversitat(coll);
-                        realm.beginTransaction();
-                        Puntuacion punt = realm.createObject(Puntuacion.class);
-                        Calendar calendar = Calendar.getInstance();
-                        SimpleDateFormat mdformat = new SimpleDateFormat("yyyy / MM / dd ");
-                        String date = "" + mdformat.format(calendar.getTime());
-                        punt.setPuntuacion(0); punt.setFecha(date);
-                        user.getPunt().add(punt);
-                        realm.copyToRealm(user);
-                        realm.commitTransaction();
+            //Get gap's content
+            userStr = u.getText().toString();
+            passStr = p.getText().toString();
+            rpass = rp.getText().toString();
+            phone = ph.getText().toString();
+            college = c.getText().toString();
+
+            if (!userStr.isEmpty() && !passStr.isEmpty()){
+                if (!rpass.isEmpty() && rpass.equals(passStr)){
+                    User check = realm.where(User.class).equalTo("username",userStr).findFirst();
+                    if (check == null) {
+                       //Add to DB
+                       saveToDatabase(userStr,passStr,phone,college);
                     }
-                    else if (!userStr.equals(userName)) {
+                    else {
                         Toast toast = Toast.makeText(getApplicationContext(),
                                 "This Username already exists.",
-                                Toast.LENGTH_SHORT);
+                                 Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.TOP, 0, 0);
                         toast.show();
                     }
-                    //Back when pressing Register Button
-                    finishActivity(0);
-
                 }
                //Unfilled Repeat pass
                 else if (rpass.isEmpty()){
@@ -101,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                     toast.show();
                 }
                 //Passwords don't match
-                else if (!rpass.equals(pass)){
+                else if (!rpass.equals(passStr)){
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "Passwords do not match.",
                             Toast.LENGTH_SHORT);
@@ -109,14 +108,6 @@ public class RegisterActivity extends AppCompatActivity {
                     toast.show();
                 }
 
-            }
-            //Unfilled gaps
-            else {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "All gaps must  be filled.",
-                        Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP, 0, 0);
-                toast.show();
             }
         }
     };
@@ -155,5 +146,58 @@ public class RegisterActivity extends AppCompatActivity {
         Log.v("retrieving",savedInstanceState.getString("password"));
         rp.setText(savedInstanceState.getString("repeatedP"));
         Log.v("retrieving",savedInstanceState.getString("repeatedP"));
+    }
+
+    public void saveToDatabase(final String username, final String password, final String telefon, final String universitat){
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm bgRealm) {
+                User user = bgRealm.createObject(User.class, username);
+                user.setPassword(password);
+                user.setTelefon(telefon);
+                user.setUniversitat(universitat);
+
+                //Getting last parameter
+                PuntuacionRealm puntuacionRealm = bgRealm.createObject(PuntuacionRealm.class);
+                Calendar calendar = Calendar.getInstance();
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat mdFormat = new SimpleDateFormat("yyyy / MM / dd ");
+                String date = "" + mdFormat.format(calendar.getTime());
+                puntuacionRealm.setPuntuacion((double) 0); puntuacionRealm.setFecha(date);
+                user.getPunt().add(puntuacionRealm);
+
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                // Transaction was a success.
+
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "You have Signed In successfully!",
+                        Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.show();
+
+                //Back when pressing Register Button
+                Log.v("Success", "User added.");
+                Intent i = new Intent(getApplicationContext(), LogInActivity.class);
+                startActivity(i);
+                setContentView(R.layout.activity_login);
+
+
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                // Transaction failed and was automatically canceled.
+                Log.e("Error", error.getMessage());
+            }
+        });
+
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        realm.close();
     }
 }

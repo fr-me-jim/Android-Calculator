@@ -16,7 +16,9 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout to use as dialog or embedded fragment
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         View view = inflater.inflate(R.layout.dialog_pause, container, false);
+        builder.setView(view);
         Button resume = view.findViewById(R.id.btnResume);
         resume.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +34,8 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
     public Dialog onCreateDialog(Bundle savedInstanceState){
         Dialog dialog = super.onCreateDialog(savedInstanceState);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.getWindow().setLayout(600,400);
         return dialog;
     }
 }

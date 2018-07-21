@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.http.GET;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,11 +45,7 @@ public class Rank_Fragment extends Fragment {
 
         Adapter adapter = new Adapter();
         ArrayList<User> dataSet = new ArrayList<>();
-        /*dataSet.add("");
-        dataSet.add("2");
-        dataSet.add("3");
-        dataSet.add("4");*/
-
+        //dataSet.add();
         adapter.dataSet = dataSet;
 
         rV.setAdapter(adapter);

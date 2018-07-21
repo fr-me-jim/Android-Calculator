@@ -13,7 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
@@ -22,7 +25,7 @@ public class LogInActivity extends AppCompatActivity  {
     EditText u,p;
     Button l, r;
     TextView tr;
-    Realm realm;
+    private Realm realm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,11 +33,13 @@ public class LogInActivity extends AppCompatActivity  {
 
         //Init Realm
         Realm.init(getApplicationContext());
-        try {
-            realm = Realm.getDefaultInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        RealmConfiguration realmConf = new RealmConfiguration.Builder()
+                .name("bdCalculator.realm")
+                .schemaVersion(1)
+                .build();
+        Realm.setDefaultConfiguration(realmConf);
+        realm = Realm.getDefaultInstance();
+
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -74,18 +79,10 @@ public class LogInActivity extends AppCompatActivity  {
             setContentView(R.layout.activity_register);
         }
     };
-    boolean logIn(String User, String Pass) {
-        return true;
-        //Select en BD  Realm
-        /*RealmResults<User> realmList = realm.where(User.class).findAll();
-        for (User us : realmList) {
-            if (User.equals(us.getUsername()) && Pass.equals(us.getPassword())) return true;
-        }
-        return false;*/
-        /*final User userName = realm.where(User.class).equalTo("username", User).findFirst();
-        final User passWord = realm.where(User.class).equalTo("password", Pass).findFirst();
-        if (User.equals(userName) && Pass.equals(passWord)) return true;
-        else return false;*/
+    boolean logIn(String user, String pass) {
+        User results = realm.where(User.class).equalTo("username",user)
+                .and().equalTo("password",pass).findFirst();
+        return results != null;
     }
 
 
@@ -111,5 +108,10 @@ public class LogInActivity extends AppCompatActivity  {
         Log.v("retrieving",savedInstanceState.getString("notReg"));
 
 
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        realm.close();
     }
 }

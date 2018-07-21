@@ -87,22 +87,21 @@ public class NavigatorActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-            toolbar.setTitle("Calculadora");
+        if (id == R.id.nav_calculator) {
+            toolbar.setTitle("Calculator");
             setSupportActionBar(toolbar);
             addFragment(new Calc_Fragment());
-        } else if (id == R.id.nav_slideshow) {
-            toolbar.setTitle("Ranking");
-            setSupportActionBar(toolbar);
-            addFragment(new Rank_Fragment());
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_memory) {
             toolbar.setTitle("Memory");
             setSupportActionBar(toolbar);
             addFragment(new Cards_Fragment());
-        } else if (id == R.id.nav_share) {
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_ranking) {
+            toolbar.setTitle("Ranking");
+            setSupportActionBar(toolbar);
+            addFragment(new Rank_Fragment());
+        } else if (id == R.id.nav_music){
+
+        } else if (id == R.id.nav_manage){
 
         }
         drawer.closeDrawer(GravityCompat.START);

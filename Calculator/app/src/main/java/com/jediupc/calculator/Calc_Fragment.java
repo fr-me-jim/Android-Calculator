@@ -95,7 +95,6 @@ public class Calc_Fragment extends Fragment {
 
 
         return rootView;
-
     }
 
 

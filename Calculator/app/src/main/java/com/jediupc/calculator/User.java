@@ -10,7 +10,7 @@ public class User extends RealmObject {
     private String password;
     private String telefon;
     private String universitat;
-    private RealmList<Puntuacion> punt;
+    private RealmList<PuntuacionRealm> punt;
 
     public void setUsername(String username){
         this.username = username;
@@ -27,8 +27,11 @@ public class User extends RealmObject {
         this.universitat = universitat;
     }
 
+    public void setPunt(RealmList<PuntuacionRealm> punt) {
+        this.punt = punt;
+    }
 
-    public RealmList<Puntuacion> getPunt() {
+    public RealmList<PuntuacionRealm> getPunt() {
         return punt;
     }
 
